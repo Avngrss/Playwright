@@ -4,10 +4,10 @@ import { LoginPage } from "../pages/LoginPage";
 test.describe("Login tests", () => {
     test.beforeEach(async({page}) => {
         const loginPage = new LoginPage(page)
-        loginPage.goto()
+        await loginPage.goto()
     })
 
-    test("Should show error when bouth fields are empty", async ({page}) => {
+    test("Should show error when both fields are empty", async ({page}) => {
         const loginPage = new LoginPage(page);
         await loginPage.login('', '');
         expect(await loginPage.getEmailError()).toContain('Email is required');
