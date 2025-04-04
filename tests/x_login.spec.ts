@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import fs from 'fs';
+import path from 'path';
 import { LoginPage } from "../pages/LoginPage";
 
 test.describe("Login tests", () => {
@@ -7,6 +9,14 @@ test.describe("Login tests", () => {
     test.beforeEach(async({page}) => {
         loginPage = new LoginPage(page)
         await loginPage.goto()
+    })
+
+    test("Should login in the application witch the right credential", async ({page}) => {
+        const userDataPath = path.join(__dirname, '../fixtures/userData.json')
+        const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'))
+        const { email, password } = userData;
+        await loginPage.login(email, password);
+        await expect(page).toHaveURL('https://practicesoftwaretesting.com/account')
     })
 
     test("Should show error when both fields are empty", async () => {

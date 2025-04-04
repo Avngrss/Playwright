@@ -23,7 +23,7 @@ export class RegisterPage extends BasePage {
     await this.gotoRegister();
   }
 
-  async registerNewUser() {
+  async registerNewUser(email: string, password: string) {
     await this.firstNameField().fill("TestUser");
     await this.lastNameField().fill("TestLastName");
     await this.dateOfBirthdayFiled().fill("2000-04-03");
@@ -33,8 +33,8 @@ export class RegisterPage extends BasePage {
     await this.stateField().fill("Alaska")
     await this.countryField().selectOption("Aruba");
     await this.phoneField().fill("324534");
-    await this.emailField().fill(`jane${Date.now()}@example.com`);
-    await this.passwordField().fill("NyGosuPass1@");
+    await this.emailField().fill(email);
+    await this.passwordField().fill(password);
     await this.registerButton().click();
   }
 }
