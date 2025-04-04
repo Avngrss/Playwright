@@ -2,26 +2,25 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from "../pages/LoginPage";
 
 test.describe("Login tests", () => {
+    let loginPage: LoginPage;
+
     test.beforeEach(async({page}) => {
-        const loginPage = new LoginPage(page)
+        loginPage = new LoginPage(page)
         await loginPage.goto()
     })
 
-    test("Should show error when both fields are empty", async ({page}) => {
-        const loginPage = new LoginPage(page);
+    test("Should show error when both fields are empty", async () => {
         await loginPage.login('', '');
         expect(await loginPage.getEmailError()).toContain('Email is required');
         expect(await loginPage.getPasswordError()).toContain('Password is required');
     })
 
-    test("Should show error when email field is empty", async ({page}) => {
-        const loginPage = new LoginPage(page);
+    test("Should show error when email field is empty", async () => {
         await loginPage.login('', 'validPassword');
         expect(await loginPage.getEmailError()).toContain('Email is required');
     })
 
-    test("Should show error when password field is empty", async ({page}) => {
-        const loginPage = new LoginPage(page);
+    test("Should show error when password field is empty", async () => {
         await loginPage.login('validEmail@gmail.com', '');
         expect(await loginPage.getPasswordError()).toContain('Password is required');
     })
