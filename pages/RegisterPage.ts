@@ -1,3 +1,4 @@
+import { expect, Locator } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 export class RegisterPage extends BasePage {
@@ -15,7 +16,7 @@ export class RegisterPage extends BasePage {
   passwordField = () => this.page.locator(`[data-test="password"]`);
   registerButton = () => this.page.locator(`[data-test="register-submit"]`);
   //Error locators
-  errorPassword = () => this.page.locator(`[data-test="password-error"]`);
+  errorPassword = () => this.page.locator(`[data-test="password-error"] div`).first()
   existedUser = () => this.page.locator(`.help-block`);
 
   //Actions
@@ -36,5 +37,10 @@ export class RegisterPage extends BasePage {
     await this.emailField().fill(email);
     await this.passwordField().fill(password);
     await this.registerButton().click();
+  }
+
+  async displayError(selector: Locator, expectedText: string) {
+    await expect(selector).toBeVisible()
+    await expect(selector).toHaveText(expectedText)
   }
 }
