@@ -4,7 +4,7 @@ import { routes } from "../config/routes";
 
 export class BasePage {
     protected page: Page;
-    protected header: HeaderComponent;
+    readonly header: HeaderComponent;
 
 
     constructor(page: Page) {
