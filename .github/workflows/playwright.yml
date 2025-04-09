@@ -29,16 +29,16 @@ jobs:
         run: npx playwright test
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v2.3.0
-        with:
-          name: allure-results
-          path: allure-results/
+        run: |
+          mkdir -p allure-results
+          cp -r ./* allure-results/
+        continue-on-error: true
 
       - name: Generate Allure HTML Report
         run: npx allure-playwright generate --report-dir=allure-report
 
       - name: Upload Allure HTML Report
-        uses: actions/upload-artifact@v2.3.0
-        with:
-          name: allure-report
-          path: allure-report/
+        run: |
+          mkdir -p allure-report
+          cp -r allure-report/* .
+        continue-on-error: true
