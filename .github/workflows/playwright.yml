@@ -29,7 +29,7 @@ jobs:
         run: npx playwright test
 
       - name: Upload Allure results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: allure-results
           path: allure-results
@@ -38,7 +38,7 @@ jobs:
         run: npx allure-playwright generate --report-dir=allure-report
 
       - name: Upload Allure HTML Report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: allure-report
           path: allure-report
