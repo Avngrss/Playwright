@@ -27,4 +27,8 @@ export class BasePage {
     async gotoRegister() {
         await this.page.goto(routes.register)
     }
+
+    async gotoContact() {
+        await this.page.goto(routes.contact)
+    }
 }
