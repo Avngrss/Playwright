@@ -1,5 +1,5 @@
 import { BasePage } from "./BasePage";
-import { HeaderComponent } from "./components/headerComponent";
+
 
 
 export class MainPage extends BasePage {

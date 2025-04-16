@@ -1,15 +1,8 @@
 import { test, expect } from '@playwright/test'
 import { MainPage } from '../pages/MainPage'
+import { languages } from '../config/routes'
 import { allure } from 'allure-playwright'
 
-const languages = [
-    {code: 'EN', expectedText: ' Categories '},
-    {code: 'DE', expectedText: ' Kategorien '},
-    {code: 'ES', expectedText: ' Categorías '},
-    {code: 'FR', expectedText: ' Catégories '},
-    {code: 'NL', expectedText: ' Categorieën '},
-    {code: 'TR', expectedText: ' Kategoriler '},
-]
 
 test.describe("i18n: Language switch", () => {
     for(const lang of languages) {
