@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { LoginPage } from "../pages/LoginPage";
+import { LoginPage } from "../../pages/LoginPage";
 import { allure } from 'allure-playwright';
 
 test.describe("Login tests", () => {

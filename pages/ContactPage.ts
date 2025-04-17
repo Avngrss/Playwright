@@ -2,13 +2,6 @@ import { expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
 
-enum ContactFormField { 
-    FirstName = 'first-name',
-    LastName = 'last-name',
-    Email = 'email',
-    Message = 'message',
-    Subject = 'subject'
-}
 
 export class ContactPage extends BasePage {
 
@@ -19,6 +12,7 @@ export class ContactPage extends BasePage {
     messageTextArea = () => this.page.locator(`[data-test="message"]`)
     attachmentFiled = () => this.page.locator(`[data-test="attachment"]`)
     contactSubmitBtn = () => this.page.locator(`[data-test="contact-submit"]`)
+    successMessage = () => this.page.getByRole('alert')
 
 
     async goto() {
@@ -26,13 +20,15 @@ export class ContactPage extends BasePage {
     }
 
     async submitContactForm() {
-        await this.firstNameField().fill('')
-        await this.lastNameField().fill('')
-        await this.emailField().fill('')
-        await this.subjectSelect().selectOption('')
-        await this.messageTextArea().fill('')
+        await this.firstNameField().fill('asd')
+        await this.lastNameField().fill('asdasd')
+        await this.emailField().fill('test111@gmail.com')
+        await this.subjectSelect().selectOption('Return')
+        await this.messageTextArea().fill('Veniam sed iure quaerat. Ipsa natus sint possimus libero deserunt deserunt dolore cupiditate. Mollitia eaque aperiam.')
         await this.contactSubmitBtn().click()
+        console.log(`${this.contactSubmitBtn()} was clicked`)
     }
+
 
     async verifyFieldError(field: string, expectedError: string) {
         const errorLocator = this.page.locator(`[data-test="${field}"]`)

@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
-import { RegisterPage } from "../pages/RegisterPage";
-import { LoginPage } from '../pages/LoginPage';
+import { RegisterPage } from "../../pages/RegisterPage";
+import { LoginPage } from '../../pages/LoginPage';
 import { allure } from 'allure-playwright';
 
 test.describe("User Registration", () => {

@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
-import { MainPage } from '../pages/MainPage'
-import { languages } from '../config/routes'
+import { MainPage } from '../../pages/MainPage'
+import { languages } from '../../config/routes'
 import { allure } from 'allure-playwright'
 
 
