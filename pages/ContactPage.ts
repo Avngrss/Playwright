@@ -19,14 +19,13 @@ export class ContactPage extends BasePage {
         await this.gotoContact()
     }
 
-    async submitContactForm() {
-        await this.firstNameField().fill('asd')
-        await this.lastNameField().fill('asdasd')
-        await this.emailField().fill('test111@gmail.com')
-        await this.subjectSelect().selectOption('Return')
-        await this.messageTextArea().fill('Veniam sed iure quaerat. Ipsa natus sint possimus libero deserunt deserunt dolore cupiditate. Mollitia eaque aperiam.')
+    async submitContactForm(firstName: string, lastName: string, email: string, subject: string, text: string) {
+        await this.firstNameField().fill(firstName)
+        await this.lastNameField().fill(lastName)
+        await this.emailField().fill(email)
+        await this.subjectSelect().selectOption(subject)
+        await this.messageTextArea().fill(text)
         await this.contactSubmitBtn().click()
-        console.log(`${this.contactSubmitBtn()} was clicked`)
     }
 
 
