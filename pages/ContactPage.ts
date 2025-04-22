@@ -19,12 +19,15 @@ export class ContactPage extends BasePage {
         await this.gotoContact()
     }
 
-    async submitContactForm(firstName: string, lastName: string, email: string, subject: string, text: string) {
+    async submitContactForm(firstName: string, lastName: string, email: string, subject: string, text: string, filePath?: string | null) {
         await this.firstNameField().fill(firstName)
         await this.lastNameField().fill(lastName)
         await this.emailField().fill(email)
         await this.subjectSelect().selectOption(subject)
         await this.messageTextArea().fill(text)
+        if (filePath) {
+            await this.attachmentFiled().setInputFiles(filePath);
+        }
         await this.contactSubmitBtn().click()
     }
 

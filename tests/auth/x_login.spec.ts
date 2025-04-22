@@ -18,7 +18,7 @@ test.describe("Login tests", () => {
         allure.tag('smoke');
         allure.description('Logs in with a valid email and password from userData.json. Expects redirect to account page.');
 
-        const userDataPath = path.join(__dirname, '../fixtures/userData.json');
+        const userDataPath = path.join(__dirname, '../../fixtures/userData.json');
         const userData = JSON.parse(fs.readFileSync(userDataPath, 'utf8'));
         const { email, password } = userData;
 

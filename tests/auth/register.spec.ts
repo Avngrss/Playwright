@@ -29,7 +29,7 @@ test.describe("User Registration", () => {
         });
 
         await test.step('Save registered user credentials to JSON file', async () => {
-            const userDataPath = path.join(__dirname, '../fixtures/userData.json');
+            const userDataPath = path.join(__dirname, '../../fixtures/userData.json');
             fs.writeFileSync(userDataPath, JSON.stringify({ email, password }));
         });
 

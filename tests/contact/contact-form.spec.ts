@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { ContactPage } from '../../pages/ContactPage';
 import { allure } from 'allure-playwright';
+import path from 'path';
 
 
 test.describe("Submit contact form", () => {
@@ -17,8 +18,10 @@ test.describe("Submit contact form", () => {
         allure.tag('smoke');
         allure.description('Submit the contact form with valid fields');
 
+        const filePath = path.resolve(__dirname, '../../test-data/txt.txt')
+
         await test.step("Fill and submit Contact form with valid data", async () => {
-            await contactPage.submitContactForm('TheUser', 'LastUserName', 'testemail@gmail.com', 'Return', 'Unde repellendus reiciendis quaerat minus dolores cupiditate necessitatibus omnis.')
+            await contactPage.submitContactForm('TheUser', 'LastUserName', 'testemail@gmail.com', 'Return', 'Unde repellendus reiciendis quaerat minus dolores cupiditate necessitatibus omnis.', filePath)
         })
 
         await test.step("Verify successful message is visibled", async () => {
