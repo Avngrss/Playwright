@@ -1,47 +1,75 @@
 import { test, expect } from '@playwright/test';
-import { MainPage } from '../../pages/MainPage'
+import { MainPage } from '../../pages/MainPage';
+import { allure } from 'allure-playwright';
 
-test.describe('Проверка товаров с использованием диапазона', () => {
-    test('Диапазон 1-100', async ({ page }) => {
-        const mainPage = new MainPage(page);
-        await mainPage.goto();
-        await mainPage.setRange(1, 100);
+test.describe('Check display range input items', () => {
+    let mainPage: MainPage;
+    
+    test.beforeEach(async({page}) => {
+        mainPage = new MainPage(page);
+        await mainPage.gotoHome(); 
+    })
+
+    test('Range from 1 to 100', async () => {
+        allure.feature('Range sort');
+        allure.label('severity', 'critical');
+        allure.tag('smoke');
+        allure.description('Set range from 1 to 100 and display items');
+
+        await test.step("Set range from 1 to 100", async () => {
+            await mainPage.setRange(1, 100);
+        })
+        
+        const productsCount = await mainPage.getProductsCount();
+        expect(productsCount).toBeGreaterThan(0);
+    });
+
+    test('Range from 100 to 200', async () => {
+        allure.feature('Range sort');
+        allure.label('severity', 'critical');
+        allure.tag('smoke');
+        allure.description('Set range from 100 to 200 and display items');
+
+        await test.step("Set range from 100 to 200", async () => {
+            await mainPage.setRange(100, 200);
+        })
 
         const productsCount = await mainPage.getProductsCount();
         expect(productsCount).toBeGreaterThan(0);
-        console.log(`Количество товаров для диапазона 1-100: ${productsCount}`);
     });
 
-    test('Диапазон 100-200', async ({ page }) => {
-        const mainPage = new MainPage(page);
-        await mainPage.goto();
-        await mainPage.setRange(100, 200);
+    test('Range from 1 to 200', async () => {
+        allure.feature('Range sort');
+        allure.label('severity', 'critical');
+        allure.tag('smoke');
+        allure.description('Set range from 1 to 200 and display items');
+
+        await test.step("Set range from 1 to 200", async () => {
+            await mainPage.setRange(1, 200);
+        })
 
         const productsCount = await mainPage.getProductsCount();
         expect(productsCount).toBeGreaterThan(0);
-        console.log(`Количество товаров для диапазона 100-200: ${productsCount}`);
     });
 
-    test('Диапазон 1-200', async ({ page }) => {
-        const mainPage = new MainPage(page);
-        await mainPage.goto();
-        await mainPage.setRange(1, 200);
+    test('Range from 2 to 1', async () => {
+        allure.feature('Range sort');
+        allure.label('severity', 'critical');
+        allure.tag('smoke');
+        allure.description('Set range from 2 to 1 and display items');
 
-        const productsCount = await mainPage.getProductsCount();
-        expect(productsCount).toBeGreaterThan(0);
-        console.log(`Количество товаров для диапазона 1-200: ${productsCount}`);
-    });
+        await test.step("Set range from 2 to 1", async () => {
+            await mainPage.setRange(2, 1);
+        })
 
-    test('Диапазон 0-1', async ({ page }) => {
-        const mainPage = new MainPage(page);
-        await mainPage.goto();
-        await mainPage.setRange(1, 2);
-
-        // Дополнительное ожидание, чтобы убедиться, что текст появился
-        await mainPage.noProductsTextSelector().waitFor({ state: 'visible', timeout: 10000 });
+        await test.step("Wait for the text will be visible", async () => {
+            await mainPage.noProductsTextSelector().waitFor({ state: 'visible', timeout: 10000 });
+        })
 
         const isNoProductsTextVisible = await mainPage.isNoProductsTextVisible();
-        expect(isNoProductsTextVisible).toBe(true);
-        console.log('Текст "There are no products found" отображается.');
+
+        await test.step("Wait for the text is as expected", async () => {
+            expect(isNoProductsTextVisible).toBe(true);
+        })       
     });
 });
