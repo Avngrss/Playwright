@@ -28,9 +28,4 @@ export class LoginPage extends BasePage {
         await this.passwordError().waitFor({ state: 'visible' });
         return (await this.passwordError().textContent()) ?? '';
     }
-
-    async getGlobalError(): Promise<string> {
-        await this.errorMessage().waitFor({ state: 'visible' });
-        return (await this.errorMessage().textContent()) ?? '';
-    }
 }
