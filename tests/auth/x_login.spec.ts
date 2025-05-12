@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { LoginPage } from "../../pages/LoginPage";
 import { allure } from 'allure-playwright';
+require('dotenv').config();
 
 test.describe("Login tests", () => {
     let loginPage: LoginPage;
